@@ -17,7 +17,10 @@ class HangpersonGame
   end
 
   def guess(letters)
-    if @guesses.include? letters or @wrong_guesses.include? letters
+    if letters == '' || /[A-Za-z]/.match?(letters) == false || letters == nil
+      raise ArgumentError
+    end
+    if @guesses.include? letters.downcase or @wrong_guesses.include? letters.downcase
       return false
     else
       letters.each_char do |letter|

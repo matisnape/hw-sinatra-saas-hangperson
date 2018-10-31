@@ -17,11 +17,15 @@ class HangpersonGame
   end
 
   def guess(letters)
-    letters.each_char do |letter|
-      if @word.include?(letter)
-        @guesses = letter
-      else
-        @wrong_guesses = letter
+    if @guesses.include? letters or @wrong_guesses.include? letters
+      return false
+    else
+      letters.each_char do |letter|
+        if @word.include?(letter)
+          @guesses = letter
+        else
+          @wrong_guesses = letter
+        end
       end
     end
   end

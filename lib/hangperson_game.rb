@@ -42,7 +42,16 @@ class HangpersonGame
         displayed[index] = char
       end
     end
-    displayed
+    return displayed
+  end
+
+  def check_win_or_lose
+    if word_with_guesses == @word
+      return :win
+    elsif @guesses == ''
+      return :lose
+    end
+    return :play
   end
 
   # You can test it by running $ bundle exec irb -I. -r app.rb

@@ -1,5 +1,6 @@
 class HangpersonGame
   attr_accessor :word
+  attr_accessor :word_with_guesses
   attr_accessor :guesses
   attr_accessor :wrong_guesses
   # add the necessary class methods, attributes, etc. here
@@ -25,12 +26,23 @@ class HangpersonGame
     else
       letters.each_char do |letter|
         if @word.include?(letter)
-          @guesses = letter
+          @guesses += letter
         else
-          @wrong_guesses = letter
+          @wrong_guesses += letter
         end
       end
     end
+  end
+
+  def word_with_guesses
+    displayed = '-' * @word.length
+    @guesses.each_char do |char|
+      char_occurences = (0 ... @word.length).find_all { |i| @word[i, 1] == char }
+      char_occurences.each do |index|
+        displayed[index] = char
+      end
+    end
+    displayed
   end
 
   # You can test it by running $ bundle exec irb -I. -r app.rb
